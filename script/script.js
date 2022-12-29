@@ -23,6 +23,12 @@ function init() {
 
 //calculating income & expensive
 function updateValue() {
+  //chaining array methods
+
+  //map=> for storing a amount values in array
+  //filter=> finding a value is < 0 or > 0
+  //reduce=> to get a single value
+
   income = transactions
     .map((val) => val.amount)
     .filter((val) => val > 0)
@@ -37,6 +43,7 @@ function updateValue() {
     .map((val) => val.amount)
     .reduce((preval, val) => preval + val, 0);
 
+  //innerText
   moneyPlusEl.innerText = `₹${income}`;
   moneyMinusEl.innerText = `₹${Math.abs(expense)}`;
   balanceEl.innerText = `₹${balance}`;
