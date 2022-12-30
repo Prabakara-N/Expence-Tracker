@@ -9,16 +9,25 @@ const formEl = document.getElementById("form");
 const transactionEl = document.getElementById("transaction");
 const amountEl = document.getElementById("amount-input");
 
+//btn
+const button = document.getElementById("btn");
+
 //global variables
 let transactions = [];
 let income = 0;
 let expense = 0;
 let balance = 0;
+let isEditing = false;
+let editId = null;
 
 //functions
+
 //initial setting
 function init() {
   listEl.innerHTML = null;
+  isEditing = false;
+  editId = null;
+  button.innerText = "Add Transaction";
 }
 
 //calculating income & expensive
@@ -53,14 +62,29 @@ function updateValue() {
 function deleteTransaction(id) {
   transactions = transactions.filter((transaction) => transaction.id !== id);
 
-  //calling init function
-  init(); //everytime the history will null and below we calling addtransaction DOM to re-add balance output
+  //everytime the history will null and below we calling addtransaction DOM to re-add balance output
+  init();
 
   //readd the list elements
   transactions.forEach((transaction) => addTransactionDom(transaction));
 
   //calling calculated value
   updateValue();
+}
+
+// edit the output
+function editTransaction(id) {
+  isEditing = true;
+  button.innerText = "Update Transaction";
+
+  //finding the element to update
+  const itemToEdit = transactions.find((transaction) => transaction.id === id);
+
+  //showing items to edit in input
+  transactionEl.value = itemToEdit.name;
+  amountEl.value = itemToEdit.amount;
+
+  editId = itemToEdit.id;
 }
 
 //addtransaction to DOM
@@ -74,7 +98,8 @@ function addTransactionDom({ id, name, amount }) {
   //innerHTML
   liEl.innerHTML = `<span>${name}</span>
                     <span>₹${amount}</span>
-                    <button class="delete-btn" onclick=deleteTransaction(${id})>X</button>`;
+                    <button class="update-btn btn" onclick=editTransaction(${id})><i class="fa-solid fa-pen"></i></button>
+                    <button class="delete-btn btn" onclick=deleteTransaction(${id})>X</button>`;
 
   //appendchild
   listEl.appendChild(liEl);
@@ -91,18 +116,38 @@ formEl.addEventListener("submit", (e) => {
   ) {
     alert("Please Enter a Valid Transaction Details");
   } else {
-    //create a transaction details
-    const transaction = {
-      id: Date.now(),
-      name: transactionEl.value,
-      amount: Number(amountEl.value),
-    };
+    if (isEditing) {
+      transactions = transactions.map((transaction) => {
+        if (transaction.id === editId) {
+          return {
+            id: editId,
+            name: transactionEl.value,
+            amount: Number(amountEl.value),
+          };
+        } else {
+          return transaction;
+        }
+      });
 
-    //storing a value(object) to transactions Array
-    transactions.push(transaction);
+      //everytime the history will null and below we calling addtransaction DOM to re-add balance output
+      init();
 
-    //add transaction to DOM
-    addTransactionDom(transaction);
+      //readd the list elements
+      transactions.forEach((transaction) => addTransactionDom(transaction));
+    } else {
+      //create a transaction details
+      const transaction = {
+        id: Date.now(),
+        name: transactionEl.value,
+        amount: Number(amountEl.value),
+      };
+
+      //storing a value(object) to transactions Array
+      transactions.push(transaction);
+
+      //add transaction to DOM
+      addTransactionDom(transaction);
+    }
   }
 
   //calling calculated value

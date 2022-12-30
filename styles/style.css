@@ -122,13 +122,15 @@ h1 {
   font-weight: 600;
 }
 
+/* history */
+
 ul {
   padding-left: 8px;
 }
 
 li {
   position: relative;
-  width: 90%;
+  width: 80%;
   margin: auto;
   padding: 0.55rem 0.75rem;
   background-color: white;
@@ -143,22 +145,45 @@ li {
   text-transform: capitalize;
 }
 
-.delete-btn {
+/* btn */
+.btn {
   position: absolute;
-  right: -40px;
   padding: 3px 8px;
   font-size: 1.15rem;
   font-weight: bold;
-  background-color: orangered;
-  border: none;
-  color: white;
   cursor: pointer;
   opacity: 0;
   transition: all 0.3s;
+  border: none;
+  color: white;
+}
+
+/* update btn */
+.update-btn {
+  right: -40px;
+  padding: 3px 6px;
+  background-color: #12bb4a;
+}
+
+.update-btn:hover {
+  background-color: #11e056;
+  transition: all 0.3s;
+}
+
+li:hover .update-btn {
+  opacity: 1;
+  transition: all 0.3s;
+}
+
+/* delete btn */
+.delete-btn {
+  right: -71px;
+  background-color: orangered;
 }
 
 li:hover .delete-btn {
   opacity: 1;
+  transition: all 0.3s;
 }
 
 .delete-btn:hover {
@@ -188,6 +213,8 @@ li:hover .delete-btn {
   color: #03256c;
 }
 
+/* input section */
+
 .input-title {
   text-align: center;
 }
@@ -216,7 +243,7 @@ label {
   color: #1768ac;
 }
 
-.btn {
+.button {
   padding: 0.75rem 0;
   border: none;
   color: white;
@@ -227,12 +254,12 @@ label {
   font-weight: 600;
 }
 
-.btn:hover {
+.button:hover {
   transition: all 0.3s;
   background-color: #063eb6;
 }
 
-/*  */
+/* to remove up&down arrow in number input */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -242,4 +269,48 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+/* social icons */
+.social-icon {
+  padding-top: 1.75rem;
+  justify-content: center;
+  display: flex;
+  gap: 2rem;
+}
+
+.social {
+  border-radius: 50%;
+  font-size: 1.75rem;
+  transition: all 0.3s;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
+}
+
+.fa-github {
+  color: #171515;
+}
+
+.fa-linkedin {
+  color: #0a66c2;
+}
+
+.fa-instagram {
+  border-radius: 25%;
+  background: radial-gradient(
+    circle at 30% 107%,
+    #8a3ab9 0%,
+    #fdf497 5%,
+    #fd5949 45%,
+    #d6249f 60%,
+    #285aeb 90%
+  );
+  -webkit-background-clip: text;
+  /* Also define standard property for compatibility */
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.social:hover {
+  transition: all 0.3s;
+  transform: scale(1.05) translateY(-7px);
 }
