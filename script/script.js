@@ -12,8 +12,11 @@ const amountEl = document.getElementById("amount-input");
 //btn
 const button = document.getElementById("btn");
 
+// getting data
+const data = JSON.parse(localStorage.getItem("transactions"));
+
 //global variables
-let transactions = [];
+let transactions = data.length > 0 ? data : [];
 let income = 0;
 let expense = 0;
 let balance = 0;
@@ -28,6 +31,12 @@ function init() {
   isEditing = false;
   editId = null;
   button.innerText = "Add Transaction";
+
+  //initial list loading
+  transactions.forEach((transaction) => addTransactionDom(transaction));
+
+  //calling calculated value
+  updateValue();
 }
 
 //calculating income & expensive
@@ -65,11 +74,14 @@ function deleteTransaction(id) {
   //everytime the history will null and below we calling addtransaction DOM to re-add balance output
   init();
 
-  //readd the list elements
-  transactions.forEach((transaction) => addTransactionDom(transaction));
+  // //readd the list elements
+  // transactions.forEach((transaction) => addTransactionDom(transaction));
 
-  //calling calculated value
-  updateValue();
+  // //calling calculated value
+  // updateValue();
+
+  // update localstorage transactions
+  localStorage.setItem("transactions", JSON.stringify(transactions));
 }
 
 // edit the output
@@ -132,8 +144,10 @@ formEl.addEventListener("submit", (e) => {
       //everytime the history will null and below we calling addtransaction DOM to re-add balance output
       init();
 
+      // create a localstorage transactions
+      localStorage.setItem("transactions", JSON.stringify(transactions));
       //readd the list elements
-      transactions.forEach((transaction) => addTransactionDom(transaction));
+      // transactions.forEach((transaction) => addTransactionDom(transaction));
     } else {
       //create a transaction details
       const transaction = {
@@ -144,6 +158,9 @@ formEl.addEventListener("submit", (e) => {
 
       //storing a value(object) to transactions Array
       transactions.push(transaction);
+
+      // create a localstorage transactions
+      localStorage.setItem("transactions", JSON.stringify(transactions));
 
       //add transaction to DOM
       addTransactionDom(transaction);
