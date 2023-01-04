@@ -62,9 +62,9 @@ function updateValue() {
     .reduce((preval, val) => preval + val, 0);
 
   //innerText
-  moneyPlusEl.innerText = income === 0 ? `₹0.00` : `₹${income}`;
-  moneyMinusEl.innerText = expense === 0 ? `₹0.00` : `₹${Math.abs(expense)}`;
-  balanceEl.innerText = balance === 0 ? `₹0.00` : `₹${balance}`;
+  moneyPlusEl.innerText = income === 0 ? `₹0.00` : `₹ ${income}`;
+  moneyMinusEl.innerText = expense === 0 ? `₹0.00` : `₹ ${Math.abs(expense)}`;
+  balanceEl.innerText = balance === 0 ? `₹0.00` : `₹ ${balance}`;
 }
 
 //delete the output
@@ -103,7 +103,7 @@ function addTransactionDom({ id, name, amount }) {
 
   //innerHTML
   liEl.innerHTML = `<span>${name}</span>
-                    <span>₹${amount}</span>
+                    <span>₹ ${amount}</span>
                     <button class="update-btn btn" onclick=editTransaction(${id})><i class="fa-solid fa-pen"></i></button>
                     <button class="delete-btn btn" onclick=deleteTransaction(${id})>X</button>`;
 
