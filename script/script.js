@@ -62,23 +62,17 @@ function updateValue() {
     .reduce((preval, val) => preval + val, 0);
 
   //innerText
-  moneyPlusEl.innerText = `₹${income}`;
-  moneyMinusEl.innerText = `₹${Math.abs(expense)}`;
-  balanceEl.innerText = `₹${balance}`;
+  moneyPlusEl.innerText = income === 0 ? `₹0.00` : `₹${income}`;
+  moneyMinusEl.innerText = expense === 0 ? `₹0.00` : `₹${Math.abs(expense)}`;
+  balanceEl.innerText = balance === 0 ? `₹0.00` : `₹${balance}`;
 }
 
 //delete the output
 function deleteTransaction(id) {
   transactions = transactions.filter((transaction) => transaction.id !== id);
 
-  //everytime the history will null and below we calling addtransaction DOM to re-add balance output
+  //initial setting
   init();
-
-  // //readd the list elements
-  // transactions.forEach((transaction) => addTransactionDom(transaction));
-
-  // //calling calculated value
-  // updateValue();
 
   // update localstorage transactions
   localStorage.setItem("transactions", JSON.stringify(transactions));
@@ -141,13 +135,11 @@ formEl.addEventListener("submit", (e) => {
         }
       });
 
-      //everytime the history will null and below we calling addtransaction DOM to re-add balance output
+      //initial setting called
       init();
 
-      // create a localstorage transactions
+      //localstorage updated and added to transactions
       localStorage.setItem("transactions", JSON.stringify(transactions));
-      //readd the list elements
-      // transactions.forEach((transaction) => addTransactionDom(transaction));
     } else {
       //create a transaction details
       const transaction = {
