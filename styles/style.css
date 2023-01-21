@@ -336,3 +336,36 @@ input[type="number"] {
   transition: all 0.3s;
   transform: scale(1.05) translateY(-7px);
 }
+
+@media screen and (max-width: 480px) {
+  main {
+    width: 95%;
+    margin: 1.5rem auto;
+  }
+
+  .output-container {
+    width: 95%;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .balance {
+    font-size: 1.15rem;
+  }
+
+  .output-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+    padding-top: 1.25rem;
+  }
+
+  .output-container h2 {
+    font-size: 1.3rem;
+  }
+}
