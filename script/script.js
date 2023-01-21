@@ -12,11 +12,14 @@ const amountEl = document.getElementById("amount-input");
 //btn
 const button = document.getElementById("btn");
 
-// getting data
-const data = JSON.parse(localStorage.getItem("transactions"));
+// radio btns
+const incomeRadio = document.getElementById("income-radio");
+const expenseRadio = document.getElementById("expense-radio");
 
 //global variables
-let transactions = data.length > 0 ? data : [];
+// getting data
+let transactions = JSON.parse(localStorage.getItem("transactions"));
+
 let income = 0;
 let expense = 0;
 let balance = 0;
@@ -66,6 +69,18 @@ function updateValue() {
   moneyMinusEl.innerText = expense === 0 ? `₹0.00` : `₹ ${Math.abs(expense)}`;
   balanceEl.innerText = balance === 0 ? `₹0.00` : `₹ ${balance}`;
 }
+
+// radio
+// function radio(income, expense) {
+//   if (income.checked) {
+//     return "income";
+//   } else if (expense.checked) {
+//     return "expense";
+//   }
+
+//   console.log((amountEl.value = amountEl.value * 1));
+//   console.log((amountEl.value = amountEl.value * -1));
+// }
 
 //delete the output
 function deleteTransaction(id) {
@@ -129,6 +144,7 @@ formEl.addEventListener("submit", (e) => {
             id: editId,
             name: transactionEl.value,
             amount: Number(amountEl.value),
+            // type: radio(incomeRadio, expenseRadio),
           };
         } else {
           return transaction;
@@ -141,11 +157,15 @@ formEl.addEventListener("submit", (e) => {
       //localstorage updated and added to transactions
       localStorage.setItem("transactions", JSON.stringify(transactions));
     } else {
+      if (!transactions) {
+        transactions = [];
+      }
       //create a transaction details
       const transaction = {
         id: Date.now(),
         name: transactionEl.value,
         amount: Number(amountEl.value),
+        // type: radio(),
       };
 
       //storing a value(object) to transactions Array

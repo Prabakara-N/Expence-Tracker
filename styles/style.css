@@ -213,6 +213,28 @@ li:hover .delete-btn {
   color: #03256c;
 }
 
+/* radio */
+
+.radio-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.radio-container label {
+  font-size: 1.25rem;
+}
+
+.icome-radio {
+  color: #11e056;
+}
+
+.expense-radio {
+  color: red;
+}
+
 /* input section */
 
 .input-title {

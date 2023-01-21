@@ -71,6 +71,23 @@
       <!-- form input container -->
       <h2 class="input-title">Add New Transaction</h2>
       <form class="input-container" id="form">
+        <!-- radio -->
+        <div class="radio-container">
+          <div class="income-radio">
+            <input type="radio" name="amount" id="icome-radio" value="income" />
+            <label for="icome-radio" class="icome-radio">Income</label>
+          </div>
+          <div class="expense-radio">
+            <input
+              type="radio"
+              name="amount"
+              id="expense-radio"
+              value="expense"
+            />
+            <label for="expense-radio" class="expense-radio">Expense</label>
+          </div>
+        </div>
+
         <label for="transaction">Transaction</label>
         <input
           type="text"
