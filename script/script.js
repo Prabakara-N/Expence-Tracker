@@ -45,11 +45,19 @@ function init() {
 // radio btn
 function radio(amount) {
   if (incomeRadioEl.checked) {
-    return (amount = amount * 1);
+    if (amount < 0) {
+      return (amount = amount * -1);
+    } else {
+      return (amount = amount * 1);
+    }
   }
 
   if (expenseRadioEl.checked) {
-    return (amount = amount * -1);
+    if (amount < 0) {
+      return (amount = amount * 1);
+    } else {
+      return (amount = amount * -1);
+    }
   }
 }
 
@@ -100,7 +108,6 @@ function editTransaction(id) {
   //finding the element to update
   const itemToEdit = transactions.find((transaction) => transaction.id === id);
 
-  //showing items to edit in input
   transactionEl.value = itemToEdit.name;
   amountEl.value = itemToEdit.amount;
 
