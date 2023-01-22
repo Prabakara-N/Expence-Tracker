@@ -13,8 +13,8 @@ const amountEl = document.getElementById("amount-input");
 const button = document.getElementById("btn");
 
 // radio btns
-const incomeRadio = document.getElementById("income-radio");
-const expenseRadio = document.getElementById("expense-radio");
+let incomeRadioEl = document.getElementById("income-radio");
+let expenseRadioEl = document.getElementById("expense-radio");
 
 //global variables
 // getting data
@@ -40,6 +40,17 @@ function init() {
 
   //calling calculated value
   updateValue();
+}
+
+// radio btn
+function radio(amount) {
+  if (incomeRadioEl.checked) {
+    return (amount = amount * 1);
+  }
+
+  if (expenseRadioEl.checked) {
+    return (amount = amount * -1);
+  }
 }
 
 //calculating income & expensive
@@ -69,18 +80,6 @@ function updateValue() {
   moneyMinusEl.innerText = expense === 0 ? `₹0.00` : `₹ ${Math.abs(expense)}`;
   balanceEl.innerText = balance === 0 ? `₹0.00` : `₹ ${balance}`;
 }
-
-// radio
-// function radio(income, expense) {
-//   if (income.checked) {
-//     return "income";
-//   } else if (expense.checked) {
-//     return "expense";
-//   }
-
-//   console.log((amountEl.value = amountEl.value * 1));
-//   console.log((amountEl.value = amountEl.value * -1));
-// }
 
 //delete the output
 function deleteTransaction(id) {
@@ -115,7 +114,6 @@ function addTransactionDom({ id, name, amount }) {
 
   //add classname to li element
   liEl.className = amount > 0 ? "plus" : "minus";
-
   //innerHTML
   liEl.innerHTML = `<span>${name}</span>
                     <span>₹ ${amount}</span>
@@ -143,8 +141,7 @@ formEl.addEventListener("submit", (e) => {
           return {
             id: editId,
             name: transactionEl.value,
-            amount: Number(amountEl.value),
-            // type: radio(incomeRadio, expenseRadio),
+            amount: radio(Number(amountEl.value)),
           };
         } else {
           return transaction;
@@ -164,8 +161,7 @@ formEl.addEventListener("submit", (e) => {
       const transaction = {
         id: Date.now(),
         name: transactionEl.value,
-        amount: Number(amountEl.value),
-        // type: radio(),
+        amount: radio(Number(amountEl.value)),
       };
 
       //storing a value(object) to transactions Array
